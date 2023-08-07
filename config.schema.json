@@ -6,10 +6,10 @@
     "type": "object",
     "properties": {
       "DEVICE_IP": {
-        "title": "IP Address",
+        "title": "IP Address for Divoom Device",
         "type": "string",
         "required": true,
-        "default": "Address for your device"
+        "default": "192.160.0.0"
       }
     }
   }
