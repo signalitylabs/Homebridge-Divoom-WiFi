@@ -1,0 +1,16 @@
+{
+  "pluginAlias": "HomebridgeDivoomWifi",
+  "pluginType": "platform",
+  "singular": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "DEVICE_IP": {
+        "title": "IP Address",
+        "type": "string",
+        "required": true,
+        "default": "Address for your device"
+      }
+    }
+  }
+}
