@@ -49,7 +49,7 @@ export class DivoomPlatformAccessory {
 
   /**
    * Handle "SET" requests from HomeKit
-   * These are sent when the user changes the state of an accessory, for example, turning on a Light bulb.
+   * These are sent when the user changes the state of an accessory, for example, turning on a display.
    */
   async setOn(value: CharacteristicValue) {
     this.divStates.On = value as boolean;
@@ -71,19 +71,9 @@ export class DivoomPlatformAccessory {
   /**
    * Handle the "GET" requests from HomeKit
    * These are sent when HomeKit wants to know the current state of the accessory, for example, checking if a Light bulb is on.
-   *
-   * GET requests should return as fast as possbile. A long delay here will result in
-   * HomeKit being unresponsive and a bad user experience in general.
-   *
-   * If your device takes time to respond you should update the status of your device
-   * asynchronously instead using the `updateCharacteristic` method instead.
-
-   * @example
-   * this.service.updateCharacteristic(this.platform.Characteristic.On, true)
    */
   async getOn(): Promise<CharacteristicValue> {
     let isOn = this.divStates.On;
-
 
     const body = {Command: 'Channel/GetAllConf'};
     const response = await fetch(`http://${this.platform.config.DEVICE_IP}/post`, {
@@ -93,15 +83,11 @@ export class DivoomPlatformAccessory {
     });
     const data = await response.json();
 
-    if(data.Brightness > 0) {
+    if(data.LightSwitch === 1) {
       isOn = true;
     }
 
     //this.platform.log.debug('Get Characteristic On ->', isOn);
-
-    // if you need to return an error to show the device as "Not Responding" in the Home app:
-    // throw new this.platform.api.hap.HapStatusError(this.platform.api.hap.HAPStatus.SERVICE_COMMUNICATION_FAILURE);
-
     return isOn;
   }
 
@@ -110,7 +96,6 @@ export class DivoomPlatformAccessory {
    * These are sent when the user changes the state of an accessory, for example, changing the Brightness
    */
   async setBrightness(value: CharacteristicValue) {
-    // implement your own code to set the brightness
     this.divStates.Brightness = value as number;
 
     const body = {Command: 'Channel/SetBrightness', Brightness: value};
