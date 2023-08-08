@@ -54,15 +54,14 @@ export class DivoomPlatformAccessory {
   async setOn(value: CharacteristicValue) {
     this.divStates.On = value as boolean;
 
-
     const body = '{"Command":"Channel/OnOffScreen","OnOff": ' + (value ? '1' : '0') + '}';
-    this.platform.log.debug('Body ->', body);
     const response = await fetch('http://'+this.platform.config.DEVICE_IP+'/post', {
       method: 'post',
       body: body,
       headers: {'Content-Type': 'application/json'},
     });
     await response.json();
+    this.service.updateCharacteristic(this.platform.Characteristic.On, value);
 
     //this.platform.log.debug('On Data ->', data);
     //this.platform.log.debug('Set Characteristic On ->', value);
@@ -83,10 +82,13 @@ export class DivoomPlatformAccessory {
     });
     const data = await response.json();
 
+    isOn = false;
     if(data.LightSwitch === 1) {
       isOn = true;
     }
-
+    this.platform.log.debug('On Data ->', data);
+    this.platform.log.debug('isOn ->', isOn);
+    this.platform.log.debug('data.LightSwitch ->', data.LightSwitch);
     //this.platform.log.debug('Get Characteristic On ->', isOn);
     return isOn;
   }
