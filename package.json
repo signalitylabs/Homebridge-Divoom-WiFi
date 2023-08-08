@@ -1,7 +1,7 @@
 {
   "displayName": "Divoom WiFi",
   "name": "homebridge-divoom-wifi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple way to interact with Pixoo 64 and other Divoom WiFi devices",
   "license": "Apache-2.0",
   "repository": {
