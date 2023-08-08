@@ -57,7 +57,7 @@ export class HomebridgeDivoomWifi implements DynamicPlatformPlugin {
     const divoomDevices = [
       {
         divUniqueId: 'DVWF-000000000000',
-        divDisplayName: 'Divoom',
+        divDisplayName: 'Pixoo Device',
       },
     ];
 
