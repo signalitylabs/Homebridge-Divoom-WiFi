@@ -1,5 +1,4 @@
 {
-  "private": true,
   "displayName": "Divoom WiFi",
   "name": "homebridge-divoom-wifi",
   "version": "1.0.0",

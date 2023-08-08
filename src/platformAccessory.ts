@@ -62,7 +62,7 @@ export class DivoomPlatformAccessory {
       body: body,
       headers: {'Content-Type': 'application/json'},
     });
-    const data = await response.json();
+    await response.json();
 
     //this.platform.log.debug('On Data ->', data);
     //this.platform.log.debug('Set Characteristic On ->', value);
@@ -104,7 +104,7 @@ export class DivoomPlatformAccessory {
       body: JSON.stringify(body),
       headers: {'Content-Type': 'application/json'},
     });
-    const data = await response.json();
+    await response.json();
 
     //this.platform.log.debug('Brightness Data ->', data);
     //this.platform.log.debug('Set Characteristic Brightness -> ', value);
